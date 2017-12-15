@@ -4,24 +4,47 @@ require.config({
     }
 });
 
-const routes = [
-    {
-        path: '/foo',
-        component: {
-            template: '<div>foo</div>'
-        }
-    },
-    {
-        path: '/bar',
-        component: function (resolve, reject) {
-            require(['text!./pages/home.html', './pages/home'], function (temp, cfg) {
+const Bar = {
+    templateUrl: './pages/bar/bar.html',
+    componentUrl: './pages/bar/bar'
+};
+
+const Foo = {
+    templateUrl: './pages/foo/foo.html',
+    componentUrl: './pages/foo/foo'
+};
+
+
+const routesConfig = {
+    '/bar': Bar,
+    '/foo': Foo
+};
+
+const routes = [];
+for (var i in routesConfig) {
+    let router = {};
+    let cur = routesConfig[i];
+    router.path = i;
+    let asyncArr = [];
+    if (cur.templateUrl) {
+        asyncArr.push('text!' + cur.templateUrl);
+    }
+    if (cur.componentUrl) {
+        asyncArr.push(cur.componentUrl);
+    }
+
+    if (asyncArr.length > 0) {
+        router.component = function (resolve, reject) {
+            require(asyncArr, function (temp, cfg) {
                 cfg.template = temp;
-                console.log(cfg);
                 resolve(cfg);
             });
         }
+    } else {
+        router.component = cur;
     }
-];
+    routes.push(router);
+}
 
 const router = new VueRouter({
     routes
