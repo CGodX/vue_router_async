@@ -4,6 +4,12 @@ define(function () {
             return {
                 name: 'CGod'
             }
+        },
+        methods: {
+            att() {
+                alert(this.name);
+            }
         }
     };
 });
+
