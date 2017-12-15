@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Hello</h1>
+        <div>
+            <router-link to="/foo">Go to Foo</router-link>
+            <router-link to="/bar">Go to Bar</router-link>
+        </div>
+        <router-view></router-view>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.9/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.js"></script>
+    <script src="https://cdn.bootcss.com/require.js/2.3.5/require.min.js"></script>
+    <script src="routers.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
